@@ -1,7 +1,9 @@
 package crypto.org.bootstrap;
 
 import crypto.org.domain.Category;
+import crypto.org.domain.Customer;
 import crypto.org.repositories.CategoryRepository;
+import crypto.org.repositories.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -13,9 +15,11 @@ public class DataLoader implements CommandLineRunner {
 
 
     private CategoryRepository categoryRepository;
+    private CustomerRepository customerRepository;
 
-    public DataLoader(CategoryRepository categoryRepository) {
+    public DataLoader(CategoryRepository categoryRepository, CustomerRepository customerRepository) {
         this.categoryRepository = categoryRepository;
+        this.customerRepository = customerRepository;
     }
 
 
@@ -23,6 +27,29 @@ public class DataLoader implements CommandLineRunner {
     @Transactional
     public void run(String... args) throws Exception {
 
+        loadCategories();
+
+        loadCustomers();
+
+    }
+
+    private void loadCustomers() {
+        Customer customer1 = new Customer();
+        customer1.setFirstName("Milos");
+        customer1.setLastName("Cuic");
+
+        Customer customer2 = new Customer();
+        customer2.setFirstName("Djordje");
+        customer2.setLastName("Perovic");
+
+        customerRepository.save(customer1);
+        customerRepository.save(customer2);
+
+
+        System.out.println("Data Loader = " + customerRepository.count());
+    }
+
+    private void loadCategories() {
         Category fruits = new Category();
         fruits.setName("Fruits");
 
@@ -45,6 +72,5 @@ public class DataLoader implements CommandLineRunner {
         categoryRepository.save(nuts);
 
         System.out.println("Data Loader = " + categoryRepository.count());
-
     }
 }
