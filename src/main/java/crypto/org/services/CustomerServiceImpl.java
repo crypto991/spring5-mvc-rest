@@ -42,10 +42,42 @@ public class CustomerServiceImpl implements CustomerService {
                 return customerDTO;
     }
 
+//    @Override
+//    public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
+//        Customer customer = customerMapper.customerDtotoCustomer(customerDTO);
+//
+//        Customer savedCustomer = customerRepository.save(customer);
+//
+//        CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
+//
+//        returnDto.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
+//
+//        return returnDto;
+//    }
+//
+//    @Override
+//    public CustomerDTO saveCustomerByDTO(Long id, CustomerDTO customerDTO) {
+//
+//        Customer customer = customerRepository.findById(id).orElseThrow(RuntimeException::new);
+//
+//        customer.setFirstName(customerDTO.getFirstName());
+//        customer.setLastName(customerDTO.getLastName());
+//
+//        customerRepository.save(customer);
+//
+//        CustomerDTO returnDto = customerMapper.customerToCustomerDTO(customer);
+//        returnDto.setCustomerUrl("/api/v1/customer/" + id);
+//
+//        return returnDto;
+//    }
+
     @Override
     public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
-        Customer customer = customerMapper.customerDtotoCustomer(customerDTO);
 
+        return saveAndReturnDTO(customerMapper.customerDtotoCustomer(customerDTO));
+    }
+
+    private CustomerDTO saveAndReturnDTO(Customer customer) {
         Customer savedCustomer = customerRepository.save(customer);
 
         CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
@@ -53,5 +85,13 @@ public class CustomerServiceImpl implements CustomerService {
         returnDto.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
 
         return returnDto;
+    }
+
+    @Override
+    public CustomerDTO saveCustomerByDTO(Long id, CustomerDTO customerDTO) {
+        Customer customer = customerMapper.customerDtotoCustomer(customerDTO);
+        customer.setId(id);
+
+        return saveAndReturnDTO(customer);
     }
 }
