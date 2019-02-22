@@ -72,4 +72,32 @@ public class CustomerServiceTest {
 
 
     }
+
+    @Test
+    public void createCustomerTest() throws Exception {
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setFirstName("Milos");
+
+        Customer savedCustomer = new Customer();
+        savedCustomer.setFirstName(customerDTO.getFirstName());
+        savedCustomer.setId(1L);
+
+        //REPOZITORI PROVER SAVE CUSTOMERA
+        when(customerRepository.save(any(Customer.class))).thenReturn(savedCustomer);
+
+        //when
+        //PROVERA KREIRANJA CUSTOMERA
+        CustomerDTO savedDto = customerService.createNewCustomer(customerDTO);
+
+        //then
+        //PROVERA JEDNAKOSTI CUSTOMERA I CUSTOMER DTO
+        assertEquals(customerDTO.getFirstName(), savedDto.getFirstName());
+        //PROVERA URLA
+        assertEquals("/api/v1/customer/1", savedDto.getCustomerUrl());
+
+
+
+
+
+    }
 }

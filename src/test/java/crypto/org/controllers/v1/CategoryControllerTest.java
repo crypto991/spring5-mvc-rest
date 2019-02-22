@@ -1,4 +1,4 @@
-package crypto.org.controllers;
+package crypto.org.controllers.v1;
 
 import crypto.org.api.v1.model.CategoryDTO;
 import crypto.org.services.CategoryService;

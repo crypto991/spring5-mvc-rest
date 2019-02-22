@@ -2,6 +2,7 @@ package crypto.org.services;
 
 import crypto.org.api.v1.mapper.CustomerMapper;
 import crypto.org.api.v1.model.CustomerDTO;
+import crypto.org.domain.Customer;
 import crypto.org.repositories.CustomerRepository;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +42,16 @@ public class CustomerServiceImpl implements CustomerService {
                 return customerDTO;
     }
 
+    @Override
+    public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
+        Customer customer = customerMapper.customerDtotoCustomer(customerDTO);
 
+        Customer savedCustomer = customerRepository.save(customer);
+
+        CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
+
+        returnDto.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
+
+        return returnDto;
+    }
 }
