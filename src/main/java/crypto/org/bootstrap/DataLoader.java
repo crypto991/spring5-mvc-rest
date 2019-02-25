@@ -2,8 +2,10 @@ package crypto.org.bootstrap;
 
 import crypto.org.domain.Category;
 import crypto.org.domain.Customer;
+import crypto.org.domain.Vendor;
 import crypto.org.repositories.CategoryRepository;
 import crypto.org.repositories.CustomerRepository;
+import crypto.org.repositories.VendorRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +18,14 @@ public class DataLoader implements CommandLineRunner {
 
     private CategoryRepository categoryRepository;
     private CustomerRepository customerRepository;
+    private VendorRepository vendorRepository;
 
-    public DataLoader(CategoryRepository categoryRepository, CustomerRepository customerRepository) {
+    public DataLoader(CategoryRepository categoryRepository,
+                      CustomerRepository customerRepository, VendorRepository vendorRepository) {
         this.categoryRepository = categoryRepository;
         this.customerRepository = customerRepository;
+        this.vendorRepository = vendorRepository;
     }
-
 
     @Override
     @Transactional
@@ -30,6 +34,9 @@ public class DataLoader implements CommandLineRunner {
         loadCategories();
 
         loadCustomers();
+
+        loadVendors();
+
 
     }
 
@@ -72,5 +79,20 @@ public class DataLoader implements CommandLineRunner {
         categoryRepository.save(nuts);
 
         System.out.println("Data Loader = " + categoryRepository.count());
+    }
+
+    private void loadVendors(){
+        Vendor vendor1 = new Vendor();
+        vendor1.setName("Some Fruits From Serbia Ltd");
+
+        Vendor vendor2 = new Vendor();
+        vendor2.setName("Cocaine From Columbia Ltd");
+
+
+        vendorRepository.save(vendor1);
+        vendorRepository.save(vendor2);
+
+        System.out.println("Data Loader = " + vendorRepository.count());
+
     }
 }

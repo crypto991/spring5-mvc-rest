@@ -7,6 +7,7 @@ import crypto.org.bootstrap.DataLoader;
 import crypto.org.domain.Customer;
 import crypto.org.repositories.CategoryRepository;
 import crypto.org.repositories.CustomerRepository;
+import crypto.org.repositories.VendorRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +31,11 @@ public class CustomerServiceImplIT {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    VendorRepository vendorRepository;
+
     CustomerService customerService;
+
 
     @Before
     public void setUp() throws Exception{
@@ -38,7 +43,7 @@ public class CustomerServiceImplIT {
         System.out.println(customerRepository.findAll().size());
 
         //setup data for testing
-        DataLoader dataLoader = new DataLoader(categoryRepository, customerRepository);
+        DataLoader dataLoader = new DataLoader(categoryRepository, customerRepository,vendorRepository );
         dataLoader.run();
 
         customerService = new CustomerServiceImpl(CustomerMapper.INSTANCE, customerRepository);
