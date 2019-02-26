@@ -35,7 +35,7 @@ public class CategoryServiceTest {
     }
 
     @Test
-    public void getAllCategories() throws Exception{
+    public void getAllCategories() throws Exception {
 
         //given
         List<Category> categories = Arrays.asList(new Category(), new Category(), new Category());

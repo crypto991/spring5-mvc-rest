@@ -38,12 +38,12 @@ public class CustomerServiceImplIT {
 
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         System.out.println("Loading Customers Data");
         System.out.println(customerRepository.findAll().size());
 
         //setup data for testing
-        DataLoader dataLoader = new DataLoader(categoryRepository, customerRepository,vendorRepository );
+        DataLoader dataLoader = new DataLoader(categoryRepository, customerRepository, vendorRepository);
         dataLoader.run();
 
         customerService = new CustomerServiceImpl(CustomerMapper.INSTANCE, customerRepository);
@@ -69,7 +69,7 @@ public class CustomerServiceImplIT {
 
         assertNotNull(updatedCustomer);
         assertEquals(updateName, updatedCustomer.getFirstName());
-        assertThat(originalFirstName,not(equalTo(updatedCustomer.getFirstName())));
+        assertThat(originalFirstName, not(equalTo(updatedCustomer.getFirstName())));
         assertThat(originalLastName, equalTo(updatedCustomer.getLastName()));
     }
 
@@ -93,12 +93,12 @@ public class CustomerServiceImplIT {
 
         assertNotNull(updatedCustomer);
         assertEquals(updateName, updatedCustomer.getLastName());
-        assertThat(originalFirstName,equalTo(updatedCustomer.getFirstName()));
+        assertThat(originalFirstName, equalTo(updatedCustomer.getFirstName()));
         assertThat(originalLastName, not(equalTo(updatedCustomer.getLastName())));
 
     }
 
-    private Long getCustomerUpdateIdValue(){
+    private Long getCustomerUpdateIdValue() {
         List<Customer> customers = customerRepository.findAll();
 
         System.out.println("Customers Found: " + customers.size());

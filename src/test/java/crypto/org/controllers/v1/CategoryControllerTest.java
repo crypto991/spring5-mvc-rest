@@ -44,7 +44,7 @@ public class CategoryControllerTest {
     }
 
     @Test
-    public void testListCategories() throws Exception{
+    public void testListCategories() throws Exception {
         CategoryDTO category1 = new CategoryDTO();
         category1.setId(1L);
         category1.setName(NAME);
@@ -58,6 +58,7 @@ public class CategoryControllerTest {
         when(categoryService.getAllCategories()).thenReturn(categories);
 
         mockMvc.perform(get("/api/v1/categories/")
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.categories", hasSize(2)));
@@ -72,6 +73,7 @@ public class CategoryControllerTest {
         when(categoryService.getCategoryByName(anyString())).thenReturn(category1);
 
         mockMvc.perform(get("/api/v1/categories/Jim")
+                .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", equalTo(NAME)));

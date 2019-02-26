@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class SwaggerConfig { //extends WebMvcConfigurationSupport {
 
     @Bean
-    public Docket api(){
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
@@ -37,19 +37,19 @@ public class SwaggerConfig { //extends WebMvcConfigurationSupport {
 //                .addResourceLocations("classpath:/META-INF/resources/webjars/");
 //    }
 
-    private ApiInfo metaData(){
+    private ApiInfo metaData() {
 
         Contact contact = new Contact("Djordje Perovic", "www.crypto.org/about", "djole@crypto.com");
 
-                return new ApiInfo(
-                        "Crypto Spring Org",
-                        "Programming Company",
-                        "1.0",
-                        "Terms of Service: blah",
-                        contact,
-                        "Apache Licence Version 2.0",
-                        "https://www.apache.org/licenses/LICENCE-2.0",
-                        new ArrayList<>());
+        return new ApiInfo(
+                "Crypto Spring Org",
+                "Programming Company",
+                "1.0",
+                "Terms of Service: blah",
+                contact,
+                "Apache Licence Version 2.0",
+                "https://www.apache.org/licenses/LICENCE-2.0",
+                new ArrayList<>());
     }
 
 

@@ -39,7 +39,7 @@ public class VendorServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        vendorService = new VendorServiceImpl(vendorRepository, VendorMapper.INSTANCE);
+        vendorService = new VendorServiceImpl(VendorMapper.INSTANCE, vendorRepository);
     }
 
     @Test
@@ -59,7 +59,6 @@ public class VendorServiceImplTest {
         //JUnit Assert that with matchers
         assertThat(vendorDTO.getName(), is(equalTo(NAME_1)));
     }
-
 
 
     @Test(expected = ResourceNotFoundException.class)

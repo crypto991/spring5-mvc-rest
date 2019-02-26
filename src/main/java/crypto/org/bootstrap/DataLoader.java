@@ -81,7 +81,7 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Data Loader = " + categoryRepository.count());
     }
 
-    private void loadVendors(){
+    private void loadVendors() {
         Vendor vendor1 = new Vendor();
         vendor1.setName("Some Fruits From Serbia Ltd");
 

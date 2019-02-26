@@ -14,13 +14,12 @@ import java.util.stream.Collectors;
 @Service
 public class VendorServiceImpl implements VendorService {
 
-    VendorRepository vendorRepository;
+    private final VendorMapper vendorMapper;
+    private final VendorRepository vendorRepository;
 
-    VendorMapper vendorMapper;
-
-    public VendorServiceImpl(VendorRepository vendorRepository, VendorMapper vendorMapper) {
-        this.vendorRepository = vendorRepository;
+    public VendorServiceImpl(VendorMapper vendorMapper, VendorRepository vendorRepository) {
         this.vendorMapper = vendorMapper;
+        this.vendorRepository = vendorRepository;
     }
 
     @Override
@@ -69,7 +68,7 @@ public class VendorServiceImpl implements VendorService {
                 .map(vendor -> {
                     //todo if more properties, add more if statements
 
-                    if(vendorDTO.getName() != null){
+                    if (vendorDTO.getName() != null) {
                         vendor.setName(vendorDTO.getName());
                     }
 
